@@ -10,7 +10,7 @@
 <div id="root"></div>
 <script type="text/babel">
     //const e = React.createElement;
-    class LikeButton extends React.Component {
+    /*class LikeButton extends React.Component {
         constructor(props) {
             super(props);
             this.state = {
@@ -19,12 +19,9 @@
         }
 
         render() {
-            return <button onClick={() => {
-                this.setState({liked: true})
-            }}> Like </button>
-
+            return <button onClick={() => {this.setState({liked: true})}}> Like </button>
         }
-    }
+    }*/
 
     class GuGuDan extends React.Component {
         //this를 쓰기 위해 constructor을 사용
@@ -50,11 +47,13 @@
         onSubmit = (e)=>{
             e.preventDefault();
             if ((this.state.first * this.state.second) === parseInt(this.state.value)) {
-                this.setState({
-                    result : '맞아요',
-                    value:'',
-                    first: Math.ceil(Math.random() * 9),
-                    second: Math.ceil(Math.random() * 9),
+                this.setState((prevState)=>{
+                    return {
+                        result: '맞아요 : ' + prevState.value,
+                        value: '',
+                        first: Math.ceil(Math.random() * 9),
+                        second: Math.ceil(Math.random() * 9)
+                    };
                 });
             } else {
                 this.setState({
@@ -62,15 +61,26 @@
                     value:'',
                 });
             }
+            this.input.focus();
+        }
+
+        //dom에 접근하고 싶을때 ref 사용
+        input;
+
+        inputRef=(c)=>{
+            this.input=c;
         }
 
         render() {
+            //setState 할때 마다 render()가 실행됨.
+            //그래서 함수는 밖으로 빼두는게 나음 왜냐면 render()안에 두면 계속 새로 만들기 때문에
+            console.log('렌더링');
             return (
                 // 쓸데 없는 공간 차지 없애기
                 <React.Fragment>
                     <div> {this.state.first} * {this.state.second}</div>
                     <form onSubmit={this.onSubmit}>
-                        <input type="number" value={this.state.value}
+                        <input ref={this.inputRef} type="number" value={this.state.value}
                                onChange={this.onChange}/>
                         <button>입력</button>
                     </form>
@@ -81,8 +91,7 @@
     }
 </script>
 <script type="text/babel">
-    ReactDOM.render(<GuGuDan/>,
-        document.querySelector('#root'));
+    ReactDOM.render(<GuGuDan/>, document.querySelector('#root'));
 </script>
 </body>
 </html>
