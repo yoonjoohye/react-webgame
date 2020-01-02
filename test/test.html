@@ -1,38 +1,88 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
+    <meta charset="utf-8">
     <script crossorigin src="https://unpkg.com/react@16/umd/react.development.js"></script>
     <script crossorigin src="https://unpkg.com/react-dom@16/umd/react-dom.development.js"></script>
     <script src="https://unpkg.com/babel-standalone@6/babel.min.js"></script>
 </head>
 <body>
-    <div id="root"></div>
-    <script type="text/babel">
-
-        class LikeButton extends React.Component{
-            constructor(props){
-                super(props);
-                this.state={
-                    liked:false,
-                }
-            }
-            render(){
-                return <button onClick={()=>{this.setState({liked:true})}}> Like </button>
-
+<div id="root"></div>
+<script type="text/babel">
+    //const e = React.createElement;
+    class LikeButton extends React.Component {
+        constructor(props) {
+            super(props);
+            this.state = {
+                liked: false,
             }
         }
-    </script>
-    <script  type="text/babel">
-        ReactDOM.render(
-            <div>
-            <LikeButton/>
-            <LikeButton/>
-            <LikeButton/>
-            <LikeButton/>
-            <LikeButton/>
-            <LikeButton/>
-            </div>,
-            document.querySelector('#root'));
-    </script>
+
+        render() {
+            return <button onClick={() => {
+                this.setState({liked: true})
+            }}> Like </button>
+
+        }
+    }
+
+    class GuGuDan extends React.Component {
+        //this를 쓰기 위해 constructor을 사용
+        //constructor(props)는 굳이 없어도 됨
+        constructor(props) {
+            super(props);
+            this.state = {
+                first: Math.ceil(Math.random() * 9),
+                second: Math.ceil(Math.random() * 9),
+                value: '',
+                result: '',
+            }
+
+        }
+
+        //onChange(){}으로 하면 this가 달라짐
+        onChange=(e) => {
+            this.setState({
+                value: e.target.value
+            });
+        }
+
+        onSubmit = (e)=>{
+            e.preventDefault();
+            if ((this.state.first * this.state.second) === parseInt(this.state.value)) {
+                this.setState({
+                    result : '맞아요',
+                    value:'',
+                    first: Math.ceil(Math.random() * 9),
+                    second: Math.ceil(Math.random() * 9),
+                });
+            } else {
+                this.setState({
+                    result : '틀렸어요',
+                    value:'',
+                });
+            }
+        }
+
+        render() {
+            return (
+                // 쓸데 없는 공간 차지 없애기
+                <React.Fragment>
+                    <div> {this.state.first} * {this.state.second}</div>
+                    <form onSubmit={this.onSubmit}>
+                        <input type="number" value={this.state.value}
+                               onChange={this.onChange}/>
+                        <button>입력</button>
+                    </form>
+                    <div>{this.state.result}</div>
+                </React.Fragment>
+            );
+        }
+    }
+</script>
+<script type="text/babel">
+    ReactDOM.render(<GuGuDan/>,
+        document.querySelector('#root'));
+</script>
 </body>
 </html>
