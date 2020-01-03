@@ -25,6 +25,7 @@
         const onSubmit=(e)=> {
             e.preventDefault();
             if ((first * second) === parseInt(value)) {
+                //리액트가 알아서 렌더링 한번만 해줌
                 setFirst(Math.ceil(Math.random() * 9));
                 setSecond(Math.ceil(Math.random() * 9));
                 setValue('');
@@ -36,6 +37,7 @@
             inputRef.current.focus();
         }
 
+        console.log('렌더링');
         return (
             <React.Fragment>
                 <div> {first} * {second}</div>
