@@ -12,10 +12,10 @@
 
 ## render()
 - render()는 setState가 실행될 때마다 계속 실행됨.
-- render 안에 적은 함수들은 웬만하면, 밖에 둬서 불러오는게 나음 왜냐면 render()가 실행될때바다 안에 것들은 새로 부르기 때문에. 
 
 ## class와 함수형 컴포넌트 
 - 함수형 컴포넌트에 hooks를 쓸 수 있게 되었다
+- class에서는 render()안에 내용을 재실행하지만, 함수형 컴포넌트는 내용전체가 재실행된다.
  ```
         this.setState((prevState)=>{
               return {
