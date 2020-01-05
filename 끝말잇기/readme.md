@@ -61,3 +61,23 @@ module.exports={
 
 }
 ```
+
+## import(es6)와 require(Common JS)
+
+import(es6가 지원하는 패키지 읽는 방법)
+```
+import foo from "foo";
+import { bar } from "foo";
+
+export default foo;
+export { bar };
+```
+
+require(자바스크립트 자체가 지원하는 패키지 읽는 방법)
+```
+var foo = require("foo");
+var bar = requre("foo").bar;
+
+module.exports = foo;
+exports.bar = bar;
+```
