@@ -70,7 +70,7 @@ import foo from "foo";
 import { bar } from "foo";
 
 export default foo;
-export { bar };
+export { bar }; //export const bar
 ```
 
 require(자바스크립트 자체가 지원하는 패키지 읽는 방법)
@@ -81,3 +81,6 @@ var bar = requre("foo").bar;
 module.exports = foo;
 exports.bar = bar;
 ```
+
+import와 require를 섞어서 사용해도 babel이 알아서 처리해주기 때문에 오류가 나지 않는다.
+단, webpack.config.js 에서는 import 사용하면 오류남 (노드가 처리하기 때문에)
