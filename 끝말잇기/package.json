@@ -2,6 +2,7 @@
   "name": "word-chain",
   "version": "1.0.0",
   "description": "",
+  "repository": "https://github.com/yoonjoohye/react-webgame",
   "main": "index.js",
   "scripts": {
     "dev": "webpack"
