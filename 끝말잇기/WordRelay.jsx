@@ -42,7 +42,7 @@ class WordRelay extends Component{
                 <div>{this.state.text}</div>
                 <form onSubmit={this.onSubmit}>
                     <input type="text" value={this.state.value} onChange={this.onChange}/>
-                    <button>입력</button>
+                    <button>클릭</button>
                 </form>
                 <div>{this.state.result}</div>
             </>
